@@ -213,10 +213,16 @@ public class StegGUI extends JFrame implements ActionListener, KeyListener {
         // user to select a file.
         int status = chooser.showOpenDialog(this);
         if (status == JFileChooser.APPROVE_OPTION) {
-            File file = chooser.getSelectedFile();
+
+            
+            String file_name =  chooser.getSelectedFile().getPath();
+            if (!file_name.endsWith(".png"))
+                file_name += ".png";
+            
+            File toWrite = new File(file_name);
             try {
 
-                ImageIO.write(previewImage.getImage(), "PNG", file);
+                ImageIO.write(previewImage.getImage(), "PNG", toWrite);
 
             } // try
             catch (IOException e) {
